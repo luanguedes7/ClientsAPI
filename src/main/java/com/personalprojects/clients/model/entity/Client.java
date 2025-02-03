@@ -18,7 +18,7 @@ public class Client {
     @Column(nullable = false, length = 11)
     private String CPF;
 
-    @Column(nullable = false, name = "register_data")
+    @Column(name = "register_data")
     private LocalDate RegisterDate;
 
     public Client() {
@@ -76,5 +76,10 @@ public class Client {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    @PrePersist
+    public void prePersist() {
+        setRegisterDate(LocalDate.now());
     }
 }
