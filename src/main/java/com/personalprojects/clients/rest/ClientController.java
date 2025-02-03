@@ -2,6 +2,7 @@ package com.personalprojects.clients.rest;
 
 import com.personalprojects.clients.model.entity.Client;
 import com.personalprojects.clients.model.repository.ClientRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client client) {
+    public Client save(@RequestBody @Valid Client client) {
         return clientRepository.save(client);
     }
 
@@ -28,7 +29,7 @@ public class ClientController {
     public Client findById(@PathVariable Integer id) {
         return clientRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
     }
 
     @DeleteMapping("{id}")
@@ -40,12 +41,12 @@ public class ClientController {
                     clientRepository.delete(client);
                     return Void.TYPE;
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, " Client not found"));
     }
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Integer id, @RequestBody Client newClient) {
+    public void update(@PathVariable Integer id, @RequestBody @Valid Client newClient) {
         clientRepository
                 .findById(id)
                 .map(client -> {
@@ -53,6 +54,6 @@ public class ClientController {
                     client.setCPF(newClient.getCPF());
                     return clientRepository.save(client);
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, " Client not found"));
     }
 }

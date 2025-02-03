@@ -18,12 +18,12 @@ public class Client {
     private Integer id;
 
     @Column(nullable = false, length = 150)
-    @NotEmpty
+    @NotEmpty(message = "{field.name.required}")
     private String Name;
 
     @Column(nullable = false, length = 11)
-    @NotNull
-    @CPF
+    @NotNull(message = "{field.cpf.required}")
+    @CPF(message = "{field.cpf.invalid}")
     private String CPF;
 
     @Column(name = "register_data", updatable = false)
