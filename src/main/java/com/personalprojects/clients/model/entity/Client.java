@@ -1,5 +1,6 @@
 package com.personalprojects.clients.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -25,12 +26,11 @@ public class Client {
 
     }
 
-    public Client(Integer id, String Name, String CPF, LocalDate RegisterDate) {
+    public Client(Integer id, String Name, String CPF) {
         super();
         this.id = id;
         this.Name = Name;
         this.CPF = CPF;
-        this.RegisterDate = RegisterDate;
     }
 
     public Integer getId() {
@@ -45,6 +45,7 @@ public class Client {
         return CPF;
     }
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     public LocalDate getRegisterDate() {
         return RegisterDate;
     }
