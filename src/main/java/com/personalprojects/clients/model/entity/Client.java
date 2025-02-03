@@ -2,6 +2,10 @@ package com.personalprojects.clients.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CPF;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -14,9 +18,12 @@ public class Client {
     private Integer id;
 
     @Column(nullable = false, length = 150)
+    @NotEmpty
     private String Name;
 
     @Column(nullable = false, length = 11)
+    @NotNull
+    @CPF
     private String CPF;
 
     @Column(name = "register_data", updatable = false)
