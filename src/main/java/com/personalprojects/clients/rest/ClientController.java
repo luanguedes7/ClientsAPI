@@ -42,4 +42,17 @@ public class ClientController {
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
+
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable Integer id, @RequestBody Client newClient) {
+        clientRepository
+                .findById(id)
+                .map(client -> {
+                    client.setName(newClient.getName());
+                    client.setCPF(newClient.getCPF());
+                    return clientRepository.save(client);
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
 }

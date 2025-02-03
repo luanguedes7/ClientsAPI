@@ -19,7 +19,7 @@ public class Client {
     @Column(nullable = false, length = 11)
     private String CPF;
 
-    @Column(name = "register_data")
+    @Column(name = "register_data", updatable = false)
     private LocalDate RegisterDate;
 
     public Client() {
