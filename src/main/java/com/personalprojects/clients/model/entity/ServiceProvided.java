@@ -1,5 +1,6 @@
 package com.personalprojects.clients.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -25,6 +26,7 @@ public class ServiceProvided {
     private BigDecimal price;
 
     @Column
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
 
     public ServiceProvided() {
