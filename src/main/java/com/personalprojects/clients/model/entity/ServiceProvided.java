@@ -3,6 +3,7 @@ package com.personalprojects.clients.model.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +23,9 @@ public class ServiceProvided {
 
     @Column(nullable = false)
     private BigDecimal price;
+
+    @Column
+    private LocalDate date;
 
     public ServiceProvided() {
 
@@ -66,6 +70,10 @@ public class ServiceProvided {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    public LocalDate getDate() {return date;}
+
+    public void setDate(LocalDate date) {this.date = date;}
 
     @Override
     public boolean equals(Object o) {
