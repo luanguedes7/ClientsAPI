@@ -8,8 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/clients")
+@CrossOrigin("http://localhost:4200")
 public class ClientController {
 
     private ClientRepository clientRepository;
@@ -30,6 +33,11 @@ public class ClientController {
         return clientRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+    }
+
+    @GetMapping
+    public List<Client> findAll() {
+        return clientRepository.findAll();
     }
 
     @DeleteMapping("{id}")
