@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_service")
-public class Service {
+public class ServiceProvided {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +23,11 @@ public class Service {
     @Column(nullable = false)
     private BigDecimal price;
 
-    public Service() {
+    public ServiceProvided() {
 
     }
 
-    public Service(Integer id, String description, Client client, BigDecimal price) {
+    public ServiceProvided(Integer id, String description, Client client, BigDecimal price) {
         super();
         this.id = id;
         this.description = description;
@@ -70,8 +70,8 @@ public class Service {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Service service = (Service) o;
-        return Objects.equals(id, service.id);
+        ServiceProvided serviceProvided = (ServiceProvided) o;
+        return Objects.equals(id, serviceProvided.id);
     }
 
     @Override
