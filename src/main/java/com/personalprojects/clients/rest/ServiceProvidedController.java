@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -49,6 +50,16 @@ public class ServiceProvidedController {
         serviceProvided.setPrice(bigDecimalConvertion.convert(serviceProvidedDTO.getPrice()));
 
         return serviceProvidedRepository.save(serviceProvided);
+    }
+
+    @GetMapping
+    public List<ServiceProvided> search(
+            @RequestParam(value = "name", required = false, defaultValue = "") String name,
+            @RequestParam(value = "month", required = false) Integer month
+    ) {
+
+        // % % serve para pesquisar nomes que apresentam parte de "name"
+        return serviceProvidedRepository.findByNameClientAndMonth("%" + name + "%", month);
     }
 
 }
